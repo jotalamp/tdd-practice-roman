@@ -5,12 +5,15 @@ using namespace std;
 string convert(unsigned int arabic) 
 {
     string roman = "";
-    if(arabic >= 10) 
+
+    while(arabic >= 10) 
     {
-        roman = "X";
+        roman += "X";
         arabic -= 10;
     }
-    for(unsigned int i = 0; i < arabic; i++)
+
+    while (arabic-- > 0)
         roman += "I";
+
     return roman;
 }
