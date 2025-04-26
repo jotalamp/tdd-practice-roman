@@ -10,4 +10,5 @@ TEST(RomanConverter, CanConvertPositiveDigits)
     EXPECT_THAT(convert(1), Eq("I"));
     EXPECT_THAT(convert(2), Eq("II"));
     EXPECT_THAT(convert(3), Eq("III"));
+    EXPECT_THAT(convert(10), Eq("X"));
 }
