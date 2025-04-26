@@ -26,19 +26,16 @@ string convert(unsigned int arabic)
             arabic -= a.arabic;
         }
 
-        if(roman == "XIIII")
-        {
-            roman = "XIV";
-        }
-
         if(roman == "VIIII")
         {
             roman = "IX";
         }
 
-        if(roman.size()>=4 && (roman.substr(roman.size()-4)=="IIII"))
+        unsigned int s = roman.size();
+
+        if(s>=4 && (roman.substr(s-4)=="IIII"))
         {
-            roman = roman.substr(0,roman.size()-3) + 'V';
+            roman = roman.substr(0,s-4) + "IV";
         }
     }
 
