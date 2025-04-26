@@ -2,18 +2,26 @@
 
 using namespace std;
 
+struct ArabicToRoman {
+    unsigned int arabic;
+    unsigned char roman;
+};
+
 string convert(unsigned int arabic) 
 {
+    vector<ArabicToRoman> arabicToRoman;
+    arabicToRoman.push_back({10, 'X'});
+    arabicToRoman.push_back({1, 'I'});
     string roman = "";
 
-    while(arabic >= 10) 
+    for(const ArabicToRoman& a : arabicToRoman) 
     {
-        roman += "X";
-        arabic -= 10;
+        while(arabic >= a.arabic) 
+        {
+            roman += a.roman;
+            arabic -= a.arabic;
+        }
     }
-
-    while (arabic-- > 0)
-        roman += "I";
 
     return roman;
 }
