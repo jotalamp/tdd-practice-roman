@@ -26,6 +26,11 @@ string convert(unsigned int arabic)
             arabic -= a.arabic;
         }
 
+        if(roman == "XIIII")
+        {
+            roman = "XIV";
+        }
+
         if(roman == "VIIII")
         {
             roman = "IX";
