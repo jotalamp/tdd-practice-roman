@@ -36,9 +36,9 @@ string convert(unsigned int arabic)
             roman = "IX";
         }
 
-        if(roman == "IIII")
+        if(roman.size()>=4 && (roman.substr(roman.size()-4)=="IIII"))
         {
-            roman = "IV";
+            roman = roman.substr(0,roman.size()-3) + 'V';
         }
     }
 
