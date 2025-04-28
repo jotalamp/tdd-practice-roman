@@ -22,20 +22,18 @@ public:
         numerals.push_back({1, "I"});
     }
 
-    string convert(const unsigned int arabicValueToConvert)
+    string convert(unsigned int arabicValueToConvert)
     {
         unsigned int arabicValueRemaining = arabicValueToConvert;
 
         roman = "";
 
-        for (unsigned int i = 0; i < numerals.size(); i++)
+        for (auto numeral : numerals)
         {
-            Numeral currentNumeral = numerals[i];
-
-            while (arabicValueRemaining >= currentNumeral.arabic)
+            while (arabicValueRemaining >= numeral.arabic)
             {
-                roman += currentNumeral.roman;
-                arabicValueRemaining -= currentNumeral.arabic;
+                roman += numeral.roman;
+                arabicValueRemaining -= numeral.arabic;
             }
         }
 
