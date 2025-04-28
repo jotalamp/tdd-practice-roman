@@ -10,12 +10,6 @@ struct ArabicToRoman
     char roman;
 };
 
-string replaceFourSameCharactersInRow(string &romans, char character)
-{
-    romans = std::regex_replace(romans, std::regex("\\IIII"), "IV");
-    return romans;
-}
-
 bool containsFourLettersInSequenceAtEnd(string &word, char letter)
 {
     if (word.length() < 4)
