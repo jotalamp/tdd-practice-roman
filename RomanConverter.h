@@ -83,9 +83,8 @@ string convert(const unsigned int arabicValueToConvert)
                 }
                 else
                 {
-                    roman = romanFiveLastCharacterRemoved + string{arabicToRoman[i - 2].roman} + string{currentNumeral.roman} + string{arabicToRoman[i - 1].roman};
+                    roman = romanFiveLastCharacterRemoved + string{previousLetterInRoman} + string{currentNumeral.roman} + string{arabicToRoman[i - 1].roman};
                 }
-
             }
             else
             {
