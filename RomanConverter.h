@@ -1,15 +1,52 @@
 #pragma once
 
+#include <regex>
+
 using namespace std;
 
 struct ArabicToRoman
 {
     unsigned int arabic;
-    unsigned char roman;
+    char roman;
 };
 
-string convert(unsigned int arabic)
+string replaceFourSameCharactersInRow(string &romans, char character)
 {
+    romans = std::regex_replace(romans, std::regex("\\IIII"), "IV");
+    return romans;
+}
+
+bool containsFourLettersInSequenceAtEnd(string &word, char letter)
+{
+    if (word.length() < 4)
+        return false;
+
+    string fourCurrentRomanNumerals = std::string(4, letter);
+
+    if (word.substr(word.size() - 4) == fourCurrentRomanNumerals)
+        return true;
+
+    return false;
+}
+
+char previousLetterBeforeFourLastLetters(string& word)
+{
+    try
+    {
+        return word[word.length()-5];
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << "String too short: " << e.what() << '\n';
+        return ' ';
+    }
+    
+}
+
+string convert(const unsigned int arabicValueToConvert)
+{
+    unsigned int arabicValueRemaining = arabicValueToConvert;
+
     vector<ArabicToRoman> arabicToRoman;
     arabicToRoman.push_back({1000, 'M'});
     arabicToRoman.push_back({500, 'D'});
@@ -20,26 +57,36 @@ string convert(unsigned int arabic)
     arabicToRoman.push_back({1, 'I'});
     string roman = "";
 
-    for (unsigned int i=0;i<arabicToRoman.size();i++)
+    for (unsigned int i = 0; i < arabicToRoman.size(); i++)
     {
-        ArabicToRoman a = arabicToRoman[i];
+        ArabicToRoman currentNumeral = arabicToRoman[i];
 
-        while (arabic >= a.arabic)
+        while (arabicValueRemaining >= currentNumeral.arabic)
         {
-            roman += a.roman;
-            arabic -= a.arabic;
+            roman += currentNumeral.roman;
+            arabicValueRemaining -= currentNumeral.arabic;
         }
 
-        if(roman == "VIIII")
+        if(containsFourLettersInSequenceAtEnd(roman, currentNumeral.roman))
         {
-            roman = "IX";
-        }
+            if (roman.size() > 4)
+            {
+                char previousLetterInRoman = previousLetterBeforeFourLastLetters(roman);
+                char nextBiggerLetter = arabicToRoman[i - 1].roman;
 
-        unsigned int s = roman.size();
-
-        if(s>=4 && (roman.substr(s-4)=="IIII"))
-        {
-            roman = roman.substr(0,s-4) + "IV";
+                if (previousLetterInRoman == nextBiggerLetter)
+                {
+                    roman = string{currentNumeral.roman} + string{arabicToRoman[i - 2].roman};
+                }
+                else
+                {
+                    roman = "XI" + string{arabicToRoman[i - 1].roman};
+                }
+            }
+            else
+            {
+                roman = "I" + string{arabicToRoman[i - 1].roman};
+            }
         }
     }
 
