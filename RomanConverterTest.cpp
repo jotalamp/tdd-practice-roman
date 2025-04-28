@@ -20,4 +20,5 @@ TEST(RomanConverter, CanConvertPositiveDigits)
     EXPECT_THAT(convert(14), Eq("XIV"));
     EXPECT_THAT(convert(50), Eq("L"));
     EXPECT_THAT(convert(100), Eq("C"));
+    EXPECT_THAT(convert(500), Eq("D"));
 }
