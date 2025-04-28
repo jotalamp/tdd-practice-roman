@@ -23,6 +23,7 @@ TEST(RomanConverter, CanConvertPositiveDigits)
     EXPECT_THAT(convert(500), Eq("D"));
     EXPECT_THAT(convert(1000), Eq("M"));
     EXPECT_THAT(convert(40), Eq("XL"));
-
     EXPECT_THAT(convert(19), Eq("XIX"));
+    EXPECT_THAT(convert(1997), Eq("MCMXCVII"));
+    EXPECT_THAT(convert(3999), Eq("MMMCMXCIX"));
 }
