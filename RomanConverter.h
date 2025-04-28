@@ -69,10 +69,11 @@ string convert(const unsigned int arabicValueToConvert)
 
         if(containsFourLettersInSequenceAtEnd(roman, currentNumeral.roman))
         {
+            char nextBiggerLetter = arabicToRoman[i - 1].roman;
+
             if (roman.size() > 4)
             {
                 char previousLetterInRoman = previousLetterBeforeFourLastLetters(roman);
-                char nextBiggerLetter = arabicToRoman[i - 1].roman;
 
                 if (previousLetterInRoman == nextBiggerLetter)
                 {
@@ -80,12 +81,12 @@ string convert(const unsigned int arabicValueToConvert)
                 }
                 else
                 {
-                    roman = "XI" + string{arabicToRoman[i - 1].roman};
+                    roman = "XI" + string{nextBiggerLetter};
                 }
             }
             else
             {
-                roman = "I" + string{arabicToRoman[i - 1].roman};
+                roman = string{currentNumeral.roman} + string{nextBiggerLetter};
             }
         }
     }
