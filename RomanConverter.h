@@ -29,18 +29,25 @@ bool containsFourLettersInSequenceAtEnd(string &word, char letter)
     return false;
 }
 
-char previousLetterBeforeFourLastLetters(string& word)
+string fiveLastCharactersRemoved(const string &word)
+{
+    if (word.length() < 5)
+        return "";
+
+    return word.substr(0, word.size() - 5);
+}
+
+char previousLetterBeforeFourLastLetters(string &word)
 {
     try
     {
-        return word[word.length()-5];
+        return word[word.length() - 5];
     }
-    catch(const std::exception& e)
+    catch (const std::exception &e)
     {
         std::cerr << "String too short: " << e.what() << '\n';
         return ' ';
     }
-    
 }
 
 string convert(const unsigned int arabicValueToConvert)
@@ -67,22 +74,24 @@ string convert(const unsigned int arabicValueToConvert)
             arabicValueRemaining -= currentNumeral.arabic;
         }
 
-        if(containsFourLettersInSequenceAtEnd(roman, currentNumeral.roman))
+        if (containsFourLettersInSequenceAtEnd(roman, currentNumeral.roman))
         {
             char nextBiggerLetter = arabicToRoman[i - 1].roman;
 
             if (roman.size() > 4)
             {
+                string romanFiveLastCharacterRemoved = fiveLastCharactersRemoved(roman);
                 char previousLetterInRoman = previousLetterBeforeFourLastLetters(roman);
 
                 if (previousLetterInRoman == nextBiggerLetter)
                 {
-                    roman = string{currentNumeral.roman} + string{arabicToRoman[i - 2].roman};
+                    roman = romanFiveLastCharacterRemoved + string{currentNumeral.roman} + string{arabicToRoman[i - 2].roman};
                 }
                 else
                 {
-                    roman = "XI" + string{nextBiggerLetter};
+                    roman = romanFiveLastCharacterRemoved + string{arabicToRoman[i - 2].roman} + string{currentNumeral.roman} + string{arabicToRoman[i - 1].roman};
                 }
+
             }
             else
             {
