@@ -6,12 +6,14 @@ link_directories($ENV{GMOCK_HOME}/mybuild $ENV{GMOCK_HOME}/gtest/mybuild)
 #add_definitions(-std=c++0x)
 set(CMAKE_CXX_FLAGS "${CMAXE_CXX_FLAGS} -Wall")
 
-set(testSources 
-   mainTest.cpp 
-   RomanConverterTest.cpp )
+set(testSources
+    RomanConverter.cpp
+    mainTest.cpp
+    RomanConverterTest.cpp)
 add_executable(test ${testSources})
-set(sources 
-   main.cpp)
+set(sources
+    RomanConverter.cpp
+    main.cpp)
 add_executable(roman-converter ${sources})
 target_link_libraries(test pthread)
 target_link_libraries(test gmock)

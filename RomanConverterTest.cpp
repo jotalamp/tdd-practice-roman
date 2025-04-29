@@ -63,3 +63,11 @@ TEST(RomanConverter, CanConvertPositiveDigits)
     EXPECT_THAT(c.convert(3447), Eq("MMMCDXLVII"));
     EXPECT_THAT(c.convert(1513), Eq("MDXIII"));
 }
+
+TEST(RomanConverter, ConvertsValuesLessThanOneToEmptyString)
+{
+    RomanConverter c;
+
+    EXPECT_THAT(c.convert(0), Eq(""));
+    EXPECT_THAT(c.convert(-1), Eq(""));
+}
